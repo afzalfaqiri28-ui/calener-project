@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Calendar App</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Main Container -->
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                📅
+                <span>Smart Calendar</span>
+            </div>
+
+            <button id="addEventBtn" class="add-btn">
+                + Add Event
+            </button>
+
+            <div class="sidebar-box">
+
+                <h3>Today's Date</h3>
+
+                <p id="todayDate"></p>
+
+            </div>
+
+            <div class="sidebar-box">
+
+                <h3>Statistics</h3>
+
+                <p>
+                    Total Events:
+                    <strong id="totalEvents">0</strong>
+                </p>
+
+                <p>
+                    Upcoming:
+                    <strong id="upcomingEvents">0</strong>
+                </p>
+
+            </div>
+
+            <div class="sidebar-box">
+
+                <h3>Notifications</h3>
+
+                <p>
+                    Enable notifications to receive
+                    reminders for your events.
+                </p>
+
+                <button id="notificationBtn" class="notification-btn">
+                    Enable Notifications
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Header -->
+            <header class="header">
+
+                <div>
+
+                    <h1 id="monthTitle">
+                        August 2026
+                    </h1>
+
+                    <p>
+                        Manage your events easily
+                    </p>
+
+                </div>
+
+                <div class="calendar-controls">
+
+                    <button id="todayBtn">
+                        Today
+                    </button>
+
+                    <button id="previousBtn">
+                        ‹
+                    </button>
+
+                    <button id="nextBtn">
+                        ›
+                    </button>
+
+                </div>
+
+            </header>
+
+            <!-- Calendar -->
+            <section class="calendar">
+
+                <!-- Week Days -->
+
+                <div class="weekdays">
+
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+
+                </div>
+
+                <!-- Calendar Days -->
+
+                <div
+                    id="calendarGrid"
+                    class="calendar-grid">
+                </div>
+
+            </section>
+
+            <!-- Upcoming Events -->
+
+            <section class="events-section">
+
+                <div class="events-header">
+
+                    <div>
+
+                        <h2>
+                            Upcoming Events
+                        </h2>
+
+                        <p>
+                            Your scheduled events
+                        </p>
+
+                    </div>
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search events..."
+                    >
+
+                </div>
+
+                <div
+                    id="eventList"
+                    class="event-list">
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- Event Modal -->
+
+    <div
+        id="eventModal"
+        class="modal hidden">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2 id="modalTitle">
+                        Add Event
+                    </h2>
+
+                    <p>
+                        Create your calendar event
+                    </p>
+
+                </div>
+
+                <button
+                    id="closeModal"
+                    class="close-btn">
+                    ×
+                </button>
+
+            </div>
+
+            <!-- Event Form -->
+
+            <form id="eventForm">
+
+                <!-- Hidden ID -->
+
+                <input
+                    type="hidden"
+                    id="eventId"
+                >
+
+                <!-- Event Title -->
+
+                <label>
+
+                    Event Title
+
+                    <input
+                        type="text"
+                        id="eventTitle"
+                        placeholder="Example: JavaScript Class"
+                        required
+                    >
+
+                </label>
+
+                <!-- Date and Time -->
+
+                <div class="form-row">
+
+                    <label>
+
+                        Date
+
+                        <input
+                            type="date"
+                            id="eventDate"
+                            required
+                        >
+
+                    </label>
+
+                    <label>
+
+                        Time
+
+                        <input
+                            type="time"
+                            id="eventTime"
+                            required
+                        >
+
+                    </label>
+
+                </div>
+
+                <!-- Category -->
+
+                <div class="form-row">
+
+                    <label>
+
+                        Category
+
+                        <select id="eventCategory">
+
+                            <option value="Study">
+                                Study
+                            </option>
+
+                            <option value="Work">
+                                Work
+                            </option>
+
+                            <option value="Personal">
+                                Personal
+                            </option>
+
+                            <option value="Meeting">
+                                Meeting
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </label>
+
+                    <!-- Reminder -->
+
+                    <label>
+
+                        Reminder
+
+                        <select id="eventReminder">
+
+                            <option value="0">
+                                At event time
+                            </option>
+
+                            <option value="5">
+                                5 minutes before
+                            </option>
+
+                            <option value="15">
+                                15 minutes before
+                            </option>
+
+                            <option value="30">
+                                30 minutes before
+                            </option>
+
+                            <option value="60">
+                                1 hour before
+                            </option>
+
+                            <option value="1440">
+                                1 day before
+                            </option>
+
+                        </select>
+
+                    </label>
+
+                </div>
+
+                <!-- Description -->
+
+                <label>
+
+                    Description
+
+                    <textarea
+                        id="eventDescription"
+                        rows="4"
+                        placeholder="Write event details..."
+                    ></textarea>
+
+                </label>
+
+                <!-- Buttons -->
+
+                <div class="form-buttons">
+
+                    <button
+                        type="button"
+                        id="deleteBtn"
+                        class="delete-btn hidden">
+                        Delete
+                    </button>
+
+                    <div>
+
+                        <button
+                            type="button"
+                            id="cancelBtn"
+                            class="cancel-btn">
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="save-btn">
+                            Save Event
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Toast Notification -->
+
+    <div
+        id="toastContainer"
+        class="toast-container">
+    </div>
+
+    <!-- JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html> 
